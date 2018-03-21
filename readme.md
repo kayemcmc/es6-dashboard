@@ -1,1 +1,1 @@
-A series of projects built with ES6, then refactored with react, react and redux and react native.
+The first of a series of projects built with ES6, then refactored with react, react and redux and react native. Nurtring my JS  💪!

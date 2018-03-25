@@ -1,7 +1,9 @@
 class UI {
     constructor() {
         this.profile = document.getElementById('profile');
+      
     }
+    //display profile ui
     showProfile(user) {
        this.profile.innerHTML = `
         <div class="card card-body mb-3">
@@ -34,6 +36,63 @@ class UI {
         <div id="repos"></div>
        `;
     }
+
+    //Show user repos 
+    showRepos(repos) {
+        let output = '';
+
+        repos.forEach(function(repo){
+            output += `
+            <div class="card card-body mb-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                    </div>
+                    <div class="col-md-6">
+                    <span class="badge badge-primary mb-3"> Public Repos: ${repo.stargazers_count
+                    }</span>
+                    <span class="badge badge-secondary mb-3"> Public Gists: ${repo.watchers_count
+                    }</span>
+                   
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        //output repos
+        document.getElementById('repos').innerHTML = output;
+    }
+    //show alert message
+    showAlert(message, className) {
+        //clear remaining alert
+        this.clearAlert();
+        //create div
+        const div = document.createElement('div');
+        //class
+        div.className = className;
+        //text
+        div.appendChild(document.createTextNode(message));
+        //parent
+        const container = document.querySelector('.searchContainer');
+        //Get Search box
+        const search = document.querySelector('.search');
+        //add between div & search
+        container.insertBefore(div, search);
+
+        //Timeout after 3 sec
+        setTimeout(() => {
+            this.clearAlert();
+        }, 3000);
+    }
+    //clear alertmessage
+    clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+        if(currentAlert) {
+            currentAlert.remove();
+        }
+    }
+
+    //clear profile
     clearProfile(){
         this.profile.innerHTML = '';
     }
